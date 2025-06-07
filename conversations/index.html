@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversation Practice</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .scenario-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .scenario-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 200px;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #333;
+      transition: transform 0.3s;
+    }
+    .scenario-card:hover {
+      transform: scale(1.05);
+    }
+    .scenario-card img {
+      width: 180px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" style="background-image: url('../background.png');">
+    <div class="overlay">
+      <h1>Conversation Practice</h1>
+      <p>Short dialogues for everyday situations.</p>
+      <a href="../index.html" class="cta-button">Back Home</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>Choose a Scenario</h2>
+    <div class="scenario-grid">
+      <a href="cab-driver.html" class="scenario-card">
+        <img src="images/cab.svg" alt="Cab driver">
+        <h3>Cab Driver</h3>
+      </a>
+      <a href="delivery.html" class="scenario-card">
+        <img src="images/delivery.svg" alt="Delivery guy">
+        <h3>Delivery Guy</h3>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Thai with Tip © 2025</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
