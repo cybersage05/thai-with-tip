@@ -627,24 +627,19 @@ function renderVocabulary() {
     const color = cardColors[idx % cardColors.length];
     header.style.backgroundColor = color;
     header.style.color = getContrast(color);
-    header.textContent = item.english;
-
-    const thai = document.createElement('div');
-    thai.className = 'thai';
-    thai.textContent = item.thai;
-
-    const roman = document.createElement('div');
-    roman.className = 'roman';
-    roman.textContent = item.roman;
+    header.textContent = item.roman;
 
     const english = document.createElement('div');
     english.className = 'english';
     english.textContent = item.english;
 
+    const thai = document.createElement('div');
+    thai.className = 'thai';
+    thai.textContent = item.thai;
+
     card.appendChild(header);
-    card.appendChild(thai);
-    card.appendChild(roman);
     card.appendChild(english);
+    card.appendChild(thai);
     container.appendChild(card);
   });
 }
