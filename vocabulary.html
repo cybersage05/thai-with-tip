@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thai Vocabulary</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .vocab-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .vocab-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 200px;
+      text-align: center;
+      padding: 20px;
+    }
+    .vocab-card img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .vocab-card .thai {
+      font-size: 1.5rem;
+      margin: 5px 0;
+    }
+    .vocab-card .roman {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 5px;
+    }
+    .vocab-card .english {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" style="background-image: url('background.png');">
+    <div class="overlay">
+      <h1>Short Vocabulary Story</h1>
+      <p>Learn Thai phrases with pictures and romanization.</p>
+      <a href="index.html" class="cta-button">Back Home</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <div id="vocabContainer" class="vocab-container"></div>
+  </section>
+
+  <footer>
+    <p>Thai with Tip © 2025</p>
+  </footer>
+
+  <script src="vocab.js"></script>
+</body>
+</html>
