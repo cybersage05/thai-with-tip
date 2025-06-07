@@ -1,4 +1,3 @@
-const placeholderImage = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMDAnIGhlaWdodD0nMjAwJz48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWxsPScjRkZEMTY2Jy8+PC9zdmc+';
 const vocabulary = [
   {
     thai: 'สวัสดี',
@@ -28,577 +27,577 @@ const vocabulary = [
     thai: 'กรุณา',
     roman: 'karuna',
     english: 'Please',
-    image: placeholderImage
+    image: 'images/vocab/please.svg',
   },
   {
     thai: 'ขอโทษ',
     roman: 'kho thot',
     english: 'Sorry',
-    image: placeholderImage
+    image: 'images/vocab/sorry.svg',
   },
   {
     thai: 'ขอโทษ',
     roman: 'kho thot',
     english: 'Excuse me',
-    image: placeholderImage
+    image: 'images/vocab/excuse_me.svg',
   },
   {
     thai: 'ที่ไหน?',
     roman: 'tee nai?',
     english: 'Where?',
-    image: placeholderImage
+    image: 'images/vocab/where_.svg',
   },
   {
     thai: 'เมื่อไหร่?',
     roman: 'meua rai?',
     english: 'When?',
-    image: placeholderImage
+    image: 'images/vocab/when_.svg',
   },
   {
     thai: 'ใคร?',
     roman: 'krai?',
     english: 'Who?',
-    image: placeholderImage
+    image: 'images/vocab/who_.svg',
   },
   {
     thai: 'อะไร?',
     roman: 'arai?',
     english: 'What?',
-    image: placeholderImage
+    image: 'images/vocab/what_.svg',
   },
   {
     thai: 'ทำไม?',
     roman: 'tammai?',
     english: 'Why?',
-    image: placeholderImage
+    image: 'images/vocab/why_.svg',
   },
   {
     thai: 'ยังไง?',
     roman: 'yang ngai?',
     english: 'How?',
-    image: placeholderImage
+    image: 'images/vocab/how_.svg',
   },
   {
     thai: 'สวัสดีตอนเช้า',
     roman: 'sawatdee ton chao',
     english: 'Good morning',
-    image: placeholderImage
+    image: 'images/vocab/good_morning.svg',
   },
   {
     thai: 'ราตรีสวัสดิ์',
     roman: 'ratri sawat',
     english: 'Good night',
-    image: placeholderImage
+    image: 'images/vocab/good_night.svg',
   },
   {
     thai: 'ลาก่อน',
     roman: 'laa gon',
     english: 'Goodbye',
-    image: placeholderImage
+    image: 'images/vocab/goodbye.svg',
   },
   {
     thai: 'เจอกัน',
     roman: 'jer gan',
     english: 'See you',
-    image: placeholderImage
+    image: 'images/vocab/see_you.svg',
   },
   {
     thai: 'ผม',
     roman: 'phom',
     english: 'I',
-    image: placeholderImage
+    image: 'images/vocab/i.svg',
   },
   {
     thai: 'คุณ',
     roman: 'khun',
     english: 'You',
-    image: placeholderImage
+    image: 'images/vocab/you.svg',
   },
   {
     thai: 'เขา',
     roman: 'khao',
     english: 'He',
-    image: placeholderImage
+    image: 'images/vocab/he.svg',
   },
   {
     thai: 'เธอ',
     roman: 'ter',
     english: 'She',
-    image: placeholderImage
+    image: 'images/vocab/she.svg',
   },
   {
     thai: 'พวกเขา',
     roman: 'phuak khao',
     english: 'They',
-    image: placeholderImage
+    image: 'images/vocab/they.svg',
   },
   {
     thai: 'เรา',
     roman: 'rao',
     english: 'We',
-    image: placeholderImage
+    image: 'images/vocab/we.svg',
   },
   {
     thai: 'เพื่อน',
     roman: 'phuean',
     english: 'Friend',
-    image: placeholderImage
+    image: 'images/vocab/friend.svg',
   },
   {
     thai: 'ครอบครัว',
     roman: 'krob krua',
     english: 'Family',
-    image: placeholderImage
+    image: 'images/vocab/family.svg',
   },
   {
     thai: 'พ่อ',
     roman: 'phaw',
     english: 'Father',
-    image: placeholderImage
+    image: 'images/vocab/father.svg',
   },
   {
     thai: 'แม่',
     roman: 'mae',
     english: 'Mother',
-    image: placeholderImage
+    image: 'images/vocab/mother.svg',
   },
   {
     thai: 'พี่ชาย',
     roman: 'phi chai',
     english: 'Brother',
-    image: placeholderImage
+    image: 'images/vocab/brother.svg',
   },
   {
     thai: 'พี่สาว',
     roman: 'phi sao',
     english: 'Sister',
-    image: placeholderImage
+    image: 'images/vocab/sister.svg',
   },
   {
     thai: 'สามี',
     roman: 'sami',
     english: 'Husband',
-    image: placeholderImage
+    image: 'images/vocab/husband.svg',
   },
   {
     thai: 'ภรรยา',
     roman: 'panraya',
     english: 'Wife',
-    image: placeholderImage
+    image: 'images/vocab/wife.svg',
   },
   {
     thai: 'ลูกชาย',
     roman: 'luk chai',
     english: 'Son',
-    image: placeholderImage
+    image: 'images/vocab/son.svg',
   },
   {
     thai: 'ลูกสาว',
     roman: 'luk sao',
     english: 'Daughter',
-    image: placeholderImage
+    image: 'images/vocab/daughter.svg',
   },
   {
     thai: 'หมา',
     roman: 'maa',
     english: 'Dog',
-    image: placeholderImage
+    image: 'images/vocab/dog.svg',
   },
   {
     thai: 'แมว',
     roman: 'maew',
     english: 'Cat',
-    image: placeholderImage
+    image: 'images/vocab/cat.svg',
   },
   {
     thai: 'น้ำ',
     roman: 'nam',
     english: 'Water',
-    image: placeholderImage
+    image: 'images/vocab/water.svg',
   },
   {
     thai: 'อาหาร',
     roman: 'ahaan',
     english: 'Food',
-    image: placeholderImage
+    image: 'images/vocab/food.svg',
   },
   {
     thai: 'ข้าว',
     roman: 'khao',
     english: 'Rice',
-    image: placeholderImage
+    image: 'images/vocab/rice.svg',
   },
   {
     thai: 'กาแฟ',
     roman: 'kaafae',
     english: 'Coffee',
-    image: placeholderImage
+    image: 'images/vocab/coffee.svg',
   },
   {
     thai: 'ชา',
     roman: 'cha',
     english: 'Tea',
-    image: placeholderImage
+    image: 'images/vocab/tea.svg',
   },
   {
     thai: 'เบียร์',
     roman: 'bia',
     english: 'Beer',
-    image: placeholderImage
+    image: 'images/vocab/beer.svg',
   },
   {
     thai: 'ไวน์',
     roman: 'wain',
     english: 'Wine',
-    image: placeholderImage
+    image: 'images/vocab/wine.svg',
   },
   {
     thai: 'โรงแรม',
     roman: 'rong raem',
     english: 'Hotel',
-    image: placeholderImage
+    image: 'images/vocab/hotel.svg',
   },
   {
     thai: 'แท็กซี่',
     roman: 'taksi',
     english: 'Taxi',
-    image: placeholderImage
+    image: 'images/vocab/taxi.svg',
   },
   {
     thai: 'รถเมล์',
     roman: 'rot mee',
     english: 'Bus',
-    image: placeholderImage
+    image: 'images/vocab/bus.svg',
   },
   {
     thai: 'รถไฟ',
     roman: 'rot fai',
     english: 'Train',
-    image: placeholderImage
+    image: 'images/vocab/train.svg',
   },
   {
     thai: 'สนามบิน',
     roman: 'sanam bin',
     english: 'Airport',
-    image: placeholderImage
+    image: 'images/vocab/airport.svg',
   },
   {
     thai: 'ตลาด',
     roman: 'ta lat',
     english: 'Market',
-    image: placeholderImage
+    image: 'images/vocab/market.svg',
   },
   {
     thai: 'ห้องน้ำ',
     roman: 'hong nam',
     english: 'Bathroom',
-    image: placeholderImage
+    image: 'images/vocab/bathroom.svg',
   },
   {
     thai: 'ช่วยด้วย',
     roman: 'chuay duay',
     english: 'Help',
-    image: placeholderImage
+    image: 'images/vocab/help.svg',
   },
   {
     thai: 'ราคา',
     roman: 'rakha',
     english: 'Price',
-    image: placeholderImage
+    image: 'images/vocab/price.svg',
   },
   {
     thai: 'แพง',
     roman: 'paeng',
     english: 'Expensive',
-    image: placeholderImage
+    image: 'images/vocab/expensive.svg',
   },
   {
     thai: 'ถูก',
     roman: 'thuk',
     english: 'Cheap',
-    image: placeholderImage
+    image: 'images/vocab/cheap.svg',
   },
   {
     thai: 'สวย',
     roman: 'suai',
     english: 'Beautiful',
-    image: placeholderImage
+    image: 'images/vocab/beautiful.svg',
   },
   {
     thai: 'อร่อย',
     roman: 'aroy',
     english: 'Delicious',
-    image: placeholderImage
+    image: 'images/vocab/delicious.svg',
   },
   {
     thai: 'ร้อน',
     roman: 'ron',
     english: 'Hot',
-    image: placeholderImage
+    image: 'images/vocab/hot.svg',
   },
   {
     thai: 'หนาว',
     roman: 'nao',
     english: 'Cold',
-    image: placeholderImage
+    image: 'images/vocab/cold.svg',
   },
   {
     thai: 'ใหญ่',
     roman: 'yai',
     english: 'Big',
-    image: placeholderImage
+    image: 'images/vocab/big.svg',
   },
   {
     thai: 'เล็ก',
     roman: 'lek',
     english: 'Small',
-    image: placeholderImage
+    image: 'images/vocab/small.svg',
   },
   {
     thai: 'ใกล้',
     roman: 'glai',
     english: 'Near',
-    image: placeholderImage
+    image: 'images/vocab/near.svg',
   },
   {
     thai: 'ไกล',
     roman: 'klai',
     english: 'Far',
-    image: placeholderImage
+    image: 'images/vocab/far.svg',
   },
   {
     thai: 'วันนี้',
     roman: 'wan nee',
     english: 'Today',
-    image: placeholderImage
+    image: 'images/vocab/today.svg',
   },
   {
     thai: 'พรุ่งนี้',
     roman: 'phrung nii',
     english: 'Tomorrow',
-    image: placeholderImage
+    image: 'images/vocab/tomorrow.svg',
   },
   {
     thai: 'เมื่อวาน',
     roman: 'muea waan',
     english: 'Yesterday',
-    image: placeholderImage
+    image: 'images/vocab/yesterday.svg',
   },
   {
     thai: 'วัน',
     roman: 'wan',
     english: 'Day',
-    image: placeholderImage
+    image: 'images/vocab/day.svg',
   },
   {
     thai: 'สัปดาห์',
     roman: 'sap daa',
     english: 'Week',
-    image: placeholderImage
+    image: 'images/vocab/week.svg',
   },
   {
     thai: 'เดือน',
     roman: 'duean',
     english: 'Month',
-    image: placeholderImage
+    image: 'images/vocab/month.svg',
   },
   {
     thai: 'ปี',
     roman: 'pii',
     english: 'Year',
-    image: placeholderImage
+    image: 'images/vocab/year.svg',
   },
   {
     thai: 'เวลา',
     roman: 'welaa',
     english: 'Time',
-    image: placeholderImage
+    image: 'images/vocab/time.svg',
   },
   {
     thai: 'เงิน',
     roman: 'ngern',
     english: 'Money',
-    image: placeholderImage
+    image: 'images/vocab/money.svg',
   },
   {
     thai: 'ตั๋ว',
     roman: 'tua',
     english: 'Ticket',
-    image: placeholderImage
+    image: 'images/vocab/ticket.svg',
   },
   {
     thai: 'เลข',
     roman: 'lek',
     english: 'Number',
-    image: placeholderImage
+    image: 'images/vocab/number.svg',
   },
   {
     thai: 'ภาษา',
     roman: 'phasa',
     english: 'Language',
-    image: placeholderImage
+    image: 'images/vocab/language.svg',
   },
   {
     thai: 'โรงเรียน',
     roman: 'rong rian',
     english: 'School',
-    image: placeholderImage
+    image: 'images/vocab/school.svg',
   },
   {
     thai: 'เมือง',
     roman: 'muang',
     english: 'City',
-    image: placeholderImage
+    image: 'images/vocab/city.svg',
   },
   {
     thai: 'ประเทศ',
     roman: 'prathet',
     english: 'Country',
-    image: placeholderImage
+    image: 'images/vocab/country.svg',
   },
   {
     thai: 'รัก',
     roman: 'rak',
     english: 'Love',
-    image: placeholderImage
+    image: 'images/vocab/love.svg',
   },
   {
     thai: 'ชอบ',
     roman: 'chob',
     english: 'Like',
-    image: placeholderImage
+    image: 'images/vocab/like.svg',
   },
   {
     thai: 'อยาก',
     roman: 'yak',
     english: 'Want',
-    image: placeholderImage
+    image: 'images/vocab/want.svg',
   },
   {
     thai: 'ต้องการ',
     roman: 'tongkan',
     english: 'Need',
-    image: placeholderImage
+    image: 'images/vocab/need.svg',
   },
   {
     thai: 'รู้',
     roman: 'roo',
     english: 'Know',
-    image: placeholderImage
+    image: 'images/vocab/know.svg',
   },
   {
     thai: 'เข้าใจ',
     roman: 'kao jai',
     english: 'Understand',
-    image: placeholderImage
+    image: 'images/vocab/understand.svg',
   },
   {
     thai: 'พูด',
     roman: 'phood',
     english: 'Speak',
-    image: placeholderImage
+    image: 'images/vocab/speak.svg',
   },
   {
     thai: 'อ่าน',
     roman: 'aan',
     english: 'Read',
-    image: placeholderImage
+    image: 'images/vocab/read.svg',
   },
   {
     thai: 'เขียน',
     roman: 'khian',
     english: 'Write',
-    image: placeholderImage
+    image: 'images/vocab/write.svg',
   },
   {
     thai: 'ฟัง',
     roman: 'fang',
     english: 'Listen',
-    image: placeholderImage
+    image: 'images/vocab/listen.svg',
   },
   {
     thai: 'กิน',
     roman: 'kin',
     english: 'Eat',
-    image: placeholderImage
+    image: 'images/vocab/eat.svg',
   },
   {
     thai: 'ดื่ม',
     roman: 'deum',
     english: 'Drink',
-    image: placeholderImage
+    image: 'images/vocab/drink.svg',
   },
   {
     thai: 'นอน',
     roman: 'non',
     english: 'Sleep',
-    image: placeholderImage
+    image: 'images/vocab/sleep.svg',
   },
   {
     thai: 'มา',
     roman: 'maa',
     english: 'Come',
-    image: placeholderImage
+    image: 'images/vocab/come.svg',
   },
   {
     thai: 'ไป',
     roman: 'bpai',
     english: 'Go',
-    image: placeholderImage
+    image: 'images/vocab/go.svg',
   },
   {
     thai: 'ทำงาน',
     roman: 'tam ngaan',
     english: 'Work',
-    image: placeholderImage
+    image: 'images/vocab/work.svg',
   },
   {
     thai: 'เรียน',
     roman: 'rian',
     english: 'Study',
-    image: placeholderImage
+    image: 'images/vocab/study.svg',
   },
   {
     thai: 'รอ',
     roman: 'ror',
     english: 'Wait',
-    image: placeholderImage
+    image: 'images/vocab/wait.svg',
   },
   {
     thai: 'เดิน',
     roman: 'dern',
     english: 'Walk',
-    image: placeholderImage
+    image: 'images/vocab/walk.svg',
   },
   {
     thai: 'วิ่ง',
     roman: 'wing',
     english: 'Run',
-    image: placeholderImage
+    image: 'images/vocab/run.svg',
   },
   {
     thai: 'หยุด',
     roman: 'yut',
     english: 'Stop',
-    image: placeholderImage
+    image: 'images/vocab/stop.svg',
   },
   {
     thai: 'นั่ง',
     roman: 'nang',
     english: 'Sit',
-    image: placeholderImage
+    image: 'images/vocab/sit.svg',
   },
   {
     thai: 'ยืน',
     roman: 'yeun',
     english: 'Stand',
-    image: placeholderImage
+    image: 'images/vocab/stand.svg',
   },
   {
     thai: 'เปิด',
     roman: 'bpert',
     english: 'Open',
-    image: placeholderImage
+    image: 'images/vocab/open.svg',
   }
 ];
 
