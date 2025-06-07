@@ -607,23 +607,27 @@ const cardColors = [
   '#4D9078', '#FF6B6B', '#48CAE4', '#9D4EDD'
 ];
 
-function getRandomColor() {
-  return cardColors[Math.floor(Math.random() * cardColors.length)];
+function getContrast(color) {
+  const hex = color.replace('#', '');
+  const r = parseInt(hex.substr(0, 2), 16);
+  const g = parseInt(hex.substr(2, 2), 16);
+  const b = parseInt(hex.substr(4, 2), 16);
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+  return yiq >= 128 ? '#000' : '#fff';
 }
 
 function renderVocabulary() {
   const container = document.getElementById('vocabContainer');
-  vocabulary.forEach(item => {
+  vocabulary.forEach((item, idx) => {
     const card = document.createElement('div');
     card.className = 'vocab-card';
-    if (!item.image.startsWith('data:image')) {
-      card.style.backgroundColor = getRandomColor();
-      card.style.color = '#fff';
-    }
 
-    const img = document.createElement('img');
-    img.src = item.image;
-    img.alt = item.english;
+    const header = document.createElement('div');
+    header.className = 'header';
+    const color = cardColors[idx % cardColors.length];
+    header.style.backgroundColor = color;
+    header.style.color = getContrast(color);
+    header.textContent = item.english;
 
     const thai = document.createElement('div');
     thai.className = 'thai';
@@ -637,7 +641,7 @@ function renderVocabulary() {
     english.className = 'english';
     english.textContent = item.english;
 
-    card.appendChild(img);
+    card.appendChild(header);
     card.appendChild(thai);
     card.appendChild(roman);
     card.appendChild(english);
