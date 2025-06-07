@@ -601,11 +601,25 @@ const vocabulary = [
   }
 ];
 
+const cardColors = [
+  '#FFD166', '#06D6A0', '#118AB2', '#EF476F',
+  '#FF9F1C', '#2EC4B6', '#A5668B', '#C30010',
+  '#4D9078', '#FF6B6B', '#48CAE4', '#9D4EDD'
+];
+
+function getRandomColor() {
+  return cardColors[Math.floor(Math.random() * cardColors.length)];
+}
+
 function renderVocabulary() {
   const container = document.getElementById('vocabContainer');
   vocabulary.forEach(item => {
     const card = document.createElement('div');
     card.className = 'vocab-card';
+    if (!item.image.startsWith('data:image')) {
+      card.style.backgroundColor = getRandomColor();
+      card.style.color = '#fff';
+    }
 
     const img = document.createElement('img');
     img.src = item.image;
