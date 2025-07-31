@@ -70,3 +70,8 @@ npx cap open android   # or 'npx cap open ios'
 ```
 
 The `www` directory in each wrapper serves your static files. After copying the site and running the build commands above you'll get native projects that can be opened with Android Studio or Xcode to generate final APK or IPA packages.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
