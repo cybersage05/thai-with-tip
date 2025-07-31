@@ -33,6 +33,40 @@ To turn the site into an installable PWA:
 
 With those files, browsers can install the site and use it offline.
 
+
 ## Deployment and Mobile Wrappers
 
-This project is static, so you can host it on services such as GitHub Pages, Netlify, or any simple web server. If you want an app store presence, you can bundle the PWA using wrappers like **Cordova**, **Capacitor**, or similar tools to produce iOS/Android packages.
+This project is static, so hosting it is as simple as uploading the files to a service such as GitHub Pages or Netlify. To distribute it through app stores you can wrap the site with tools like **Cordova** or **Capacitor**.
+
+### Prerequisites
+
+1. [Node.js](https://nodejs.org) installed and available in your PATH.
+2. Either Cordova (`npm install -g cordova`) or Capacitor (`npm install -g @capacitor/cli`).
+
+### Cordova example
+
+```bash
+cordova create thai-app com.example.thaiapp ThaiApp
+cd thai-app
+cordova platform add android ios
+# Copy the static site into Cordova's www folder
+rm -rf www/*
+cp -r ../thai-with-tip/* www/
+cordova build android  # Produces an APK
+cordova build ios      # Requires Xcode to produce an IPA
+```
+
+### Capacitor example
+
+```bash
+npm init @capacitor/app thai-app
+cd thai-app
+npx cap add android
+npx cap add ios
+rm -rf www/*
+cp -r ../thai-with-tip/* www/
+npx cap copy
+npx cap open android   # or 'npx cap open ios'
+```
+
+The `www` directory in each wrapper serves your static files. After copying the site and running the build commands above you'll get native projects that can be opened with Android Studio or Xcode to generate final APK or IPA packages.
