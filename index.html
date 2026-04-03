@@ -1,95 +1,658 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thai with Tip – Learn Thai for Free</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="manifest" href="manifest.json" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thai with Tip</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#f5c842;
+  --hot-pink:#ff2d78;
+  --deep:#0a0612;
+  --mid:#130d24;
+  --teal:#00e5c0;
+  --cream:#fef8ee;
+  --orange:#ff6b1a;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Space Mono',monospace;
+  background:var(--deep);
+  color:var(--cream);
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* CUSTOM CURSOR */
+.cursor{
+  position:fixed;width:12px;height:12px;
+  background:var(--gold);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s,background 0.2s;
+  mix-blend-mode:difference;
+}
+.cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1.5px solid var(--gold);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform 0.18s ease,opacity 0.3s;
+  mix-blend-mode:difference;
+}
+
+/* NOISE OVERLAY */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1;opacity:0.4;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 40px;
+  border-bottom:1px solid rgba(245,200,66,0.15);
+  backdrop-filter:blur(20px);
+  background:rgba(10,6,18,0.7);
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;color:var(--gold);
+  letter-spacing:0.05em;
+}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{
+  color:rgba(254,248,238,0.6);text-decoration:none;
+  font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--gold);}
+
+/* HERO */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  overflow:hidden;padding:120px 40px 80px;
+  text-align:center;
+}
+
+/* ANIMATED BACKGROUND */
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 40%, #1a0a2e 0%, var(--deep) 70%);
+}
+.orb{
+  position:absolute;border-radius:50%;
+  filter:blur(60px);opacity:0.35;
+  animation:float 8s ease-in-out infinite;
+}
+.orb1{width:500px;height:500px;background:#6b21a8;top:-100px;left:-150px;animation-delay:0s;}
+.orb2{width:400px;height:400px;background:#0f766e;top:200px;right:-100px;animation-delay:-3s;}
+.orb3{width:300px;height:300px;background:#be123c;bottom:-50px;left:30%;animation-delay:-5s;}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-30px) scale(1.05);}
+}
+
+/* MARQUEE */
+.marquee-wrap{
+  position:absolute;top:80px;left:0;right:0;
+  overflow:hidden;white-space:nowrap;
+  border-top:1px solid rgba(245,200,66,0.2);
+  border-bottom:1px solid rgba(245,200,66,0.2);
+  padding:8px 0;
+  background:rgba(245,200,66,0.04);
+}
+.marquee-inner{
+  display:inline-block;
+  animation:marquee 20s linear infinite;
+}
+.marquee-inner span{
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(245,200,66,0.5);margin:0 3rem;
+}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* HERO CONTENT */
+.eyebrow{
+  font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:1.5rem;
+  border:1px solid rgba(0,229,192,0.3);
+  display:inline-block;padding:6px 16px;border-radius:2px;
+}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(4rem,12vw,10rem);
+  font-weight:900;line-height:0.9;
+  margin-bottom:0.5rem;
+  background:linear-gradient(135deg,var(--cream) 0%,var(--gold) 40%,var(--hot-pink) 80%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-0.03em;
+}
+.hero-title-italic{
+  font-style:italic;font-weight:400;
+  font-size:clamp(2rem,6vw,5rem);
+  display:block;color:var(--teal);
+  -webkit-text-fill-color:var(--teal);
+}
+.hero-sub{
+  font-size:0.9rem;color:rgba(254,248,238,0.55);
+  max-width:480px;margin:2rem auto;
+  line-height:1.8;letter-spacing:0.03em;
+}
+
+/* GLITCH TEXT */
+.glitch{
+  position:relative;display:inline-block;
+}
+.glitch::before,.glitch::after{
+  content:attr(data-text);position:absolute;inset:0;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.glitch::before{
+  background:linear-gradient(135deg,var(--cream),var(--gold),var(--hot-pink));
+  animation:glitch1 4s infinite;clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);
+  transform:translateX(-2px);
+}
+.glitch::after{
+  background:linear-gradient(135deg,var(--cream),var(--gold),var(--hot-pink));
+  animation:glitch2 4s infinite;clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);
+  transform:translateX(2px);
+}
+@keyframes glitch1{0%,90%,100%{opacity:0;}92%,97%{opacity:0.8;transform:translateX(-4px);}}
+@keyframes glitch2{0%,88%,100%{opacity:0;}90%,95%{opacity:0.8;transform:translateX(4px);}}
+
+/* THAI CHAR RAIN */
+.thai-rain{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  font-family:'Noto Sans Thai',sans-serif;
+}
+.thai-char{
+  position:absolute;font-size:1.2rem;
+  color:rgba(245,200,66,0.12);
+  animation:rain-fall linear infinite;
+}
+@keyframes rain-fall{
+  0%{transform:translateY(-20px);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:0.5;}
+  100%{transform:translateY(100vh);opacity:0;}
+}
+
+/* HERO BUTTONS */
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;}
+.btn-primary{
+  background:var(--gold);color:var(--deep);
+  padding:14px 32px;font-family:'Space Mono',monospace;
+  font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;border:none;cursor:none;
+  position:relative;overflow:hidden;transition:transform 0.2s;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:var(--hot-pink);transform:translateX(-105%);
+  transition:transform 0.3s ease;
+}
+.btn-primary:hover{transform:scale(1.03);}
+.btn-primary:hover::before{transform:translateX(0);}
+.btn-primary span{position:relative;z-index:1;}
+
+.btn-ghost{
+  background:transparent;color:var(--cream);
+  padding:13px 32px;font-family:'Space Mono',monospace;
+  font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;border:1px solid rgba(254,248,238,0.3);
+  cursor:none;transition:all 0.2s;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+
+/* SCROLL INDICATOR */
+.scroll-ind{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(254,248,238,0.3);font-size:0.65rem;letter-spacing:0.2em;
+}
+.scroll-line{
+  width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);
+  animation:scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+
+/* STATS BAR */
+.stats-bar{
+  background:var(--mid);
+  border-top:1px solid rgba(245,200,66,0.15);
+  border-bottom:1px solid rgba(245,200,66,0.15);
+  padding:24px 40px;
+  display:flex;justify-content:center;align-items:center;
+  gap:4rem;flex-wrap:wrap;
+}
+.stat{text-align:center;}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.5rem;font-weight:900;
+  background:linear-gradient(135deg,var(--gold),var(--orange));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(254,248,238,0.4);margin-top:4px;}
+.stat-div{width:1px;height:50px;background:rgba(245,200,66,0.15);}
+
+/* BENTO GRID */
+.bento-section{padding:80px 40px;max-width:1200px;margin:0 auto;}
+.section-label{
+  font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--hot-pink);margin-bottom:3rem;
+  display:flex;align-items:center;gap:12px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:rgba(255,45,120,0.2);}
+
+.bento-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto;
+  gap:16px;
+}
+.bento-card{
+  background:var(--mid);
+  border:1px solid rgba(245,200,66,0.08);
+  border-radius:4px;padding:32px;
+  position:relative;overflow:hidden;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.bento-card:hover{border-color:rgba(245,200,66,0.3);transform:translateY(-2px);}
+.bento-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(245,200,66,0.03) 0%,transparent 60%);
+  pointer-events:none;
+}
+.bento-card.wide{grid-column:span 2;}
+.bento-card.tall{grid-row:span 2;}
+
+.card-icon{
+  font-size:2rem;margin-bottom:1rem;
+  display:block;
+}
+.card-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:700;
+  color:var(--cream);margin-bottom:0.75rem;
+  line-height:1.2;
+}
+.card-body{
+  font-size:0.8rem;color:rgba(254,248,238,0.5);
+  line-height:1.8;
+}
+.card-tag{
+  display:inline-block;margin-top:1.5rem;
+  font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--teal);border:1px solid rgba(0,229,192,0.3);
+  padding:4px 10px;border-radius:2px;
+}
+.card-number{
+  font-family:'Playfair Display',serif;
+  font-size:5rem;font-weight:900;
+  line-height:1;
+  background:linear-gradient(135deg,rgba(245,200,66,0.15),rgba(245,200,66,0.05));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  position:absolute;bottom:-10px;right:16px;
+}
+
+/* PHRASE TICKER */
+.phrase-section{
+  padding:60px 40px;
+  background:var(--mid);
+  border-top:1px solid rgba(245,200,66,0.1);
+  border-bottom:1px solid rgba(245,200,66,0.1);
+  text-align:center;
+}
+.phrase-eyebrow{font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(254,248,238,0.4);margin-bottom:2rem;}
+.phrase-display{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,5vw,4rem);
+  font-weight:900;
+  min-height:1.2em;
+  position:relative;
+}
+.phrase-thai{color:var(--gold);}
+.phrase-rom{
+  display:block;font-size:clamp(1rem,2.5vw,1.8rem);
+  font-weight:400;font-style:italic;
+  color:var(--teal);margin-top:0.5rem;
+}
+.phrase-eng{
+  display:block;font-size:clamp(0.8rem,1.5vw,1rem);
+  font-weight:400;font-family:'Space Mono',monospace;
+  color:rgba(254,248,238,0.4);margin-top:0.5rem;letter-spacing:0.05em;
+}
+.phrase-btn{
+  margin-top:2rem;background:transparent;
+  border:1px solid rgba(245,200,66,0.3);
+  color:var(--gold);font-family:'Space Mono',monospace;
+  font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
+  padding:10px 24px;cursor:none;transition:all 0.2s;border-radius:2px;
+}
+.phrase-btn:hover{background:var(--gold);color:var(--deep);}
+
+/* MEET TIP */
+.tip-section{
+  padding:80px 40px;max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.tip-text .big-quote{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.5rem,3vw,2.5rem);
+  font-weight:900;line-height:1.3;
+  color:var(--cream);margin-bottom:1.5rem;
+}
+.tip-text .big-quote em{color:var(--gold);font-style:italic;}
+.tip-body{font-size:0.85rem;color:rgba(254,248,238,0.55);line-height:1.9;margin-bottom:2rem;}
+
+.tip-image-wrap{
+  position:relative;
+}
+.tip-frame{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--hot-pink) 100%);
+  padding:3px;border-radius:4px;
+}
+.tip-img-inner{
+  background:var(--mid);border-radius:3px;
+  aspect-ratio:3/4;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:8rem;
+}
+.tip-badge{
+  position:absolute;top:-20px;right:-20px;
+  width:80px;height:80px;border-radius:50%;
+  background:var(--hot-pink);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;
+  line-height:1.3;text-align:center;
+  border:2px solid var(--deep);
+}
+
+/* CTA */
+.cta-section{
+  padding:120px 40px;text-align:center;
+  position:relative;overflow:hidden;
+  background:var(--deep);
+}
+.cta-bg-text{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Playfair Display',serif;font-size:18vw;font-weight:900;
+  color:rgba(245,200,66,0.03);white-space:nowrap;pointer-events:none;
+  letter-spacing:-0.05em;
+}
+.cta-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.5rem,6vw,5rem);font-weight:900;
+  line-height:1;color:var(--cream);position:relative;z-index:1;
+}
+.cta-title em{color:var(--gold);font-style:italic;}
+.cta-sub{
+  font-size:0.85rem;color:rgba(254,248,238,0.4);
+  margin:1.5rem 0 3rem;letter-spacing:0.05em;position:relative;z-index:1;
+}
+
+/* FOOTER */
+footer{
+  padding:40px;background:var(--mid);
+  border-top:1px solid rgba(245,200,66,0.1);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.footer-logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.1rem;}
+.footer-text{font-size:0.7rem;color:rgba(254,248,238,0.3);letter-spacing:0.1em;}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{
+  font-size:0.7rem;color:rgba(254,248,238,0.4);text-decoration:none;
+  letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--gold);}
+
+/* SOCIALS */
+.social-row{display:flex;gap:1rem;justify-content:center;margin:2rem 0;}
+.soc-btn{
+  display:flex;align-items:center;gap:8px;
+  border:1px solid rgba(254,248,238,0.2);
+  padding:10px 20px;border-radius:2px;color:var(--cream);
+  text-decoration:none;font-size:0.75rem;letter-spacing:0.1em;
+  transition:all 0.2s;
+}
+.soc-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  .bento-grid{grid-template-columns:1fr;}
+  .bento-card.wide{grid-column:span 1;}
+  .tip-section{grid-template-columns:1fr;gap:40px;}
+  .stats-bar{gap:2rem;}
+  .stat-div{display:none;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  footer{flex-direction:column;text-align:center;}
+  .footer-links{justify-content:center;}
+}
+</style>
 </head>
 <body>
-  <nav class="navbar">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<nav>
+  <div class="nav-logo">Thai with Tip</div>
+  <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="vocabulary.html">Vocabulary</a>
     <a href="conversations/index.html">Conversations</a>
     <a href="Download_page.html">Download</a>
-  </nav>
-  <header class="hero" style="background-image: url('background.png');">
-    <div class="overlay">
-      <h1>Learn Thai with Tip</h1>
-      <p>A heartfelt journey into language, culture, and connection.</p>
+  </div>
+</nav>
 
-      <div class="social-links scroll-bounce">
-        <a href="https://instagram.com/thaiwithtip" target="_blank" class="social-item">
-          <img src="instagram.png" alt="Instagram Logo">
-          <span>Instagram</span>
-        </a>
-        <a href="https://youtube.com/@thaiwithtip" target="_blank" class="social-item">
-          <img src="youtube.png" alt="YouTube Logo">
-          <span>YouTube</span>
-        </a>
-      </div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
-      <p class="scroll-hint">👇 Scroll down for your first free lesson</p>
+  <div class="thai-rain" id="thai-rain"></div>
+
+  <div class="marquee-wrap">
+    <div class="marquee-inner">
+      <span>สวัสดี</span><span>ขอบคุณ</span><span>ยินดีต้อนรับ</span><span>สวัสดี</span><span>ขอบคุณ</span><span>ยินดีต้อนรับ</span><span>สวัสดี</span><span>ขอบคุณ</span><span>ยินดีต้อนรับ</span><span>สวัสดี</span><span>ขอบคุณ</span><span>ยินดีต้อนรับ</span><span>สวัสดี</span><span>ขอบคุณ</span><span>ยินดีต้อนรับ</span><span>สวัสดี</span><span>ขอบคุณ</span><span>ยินดีต้อนรับ</span>
     </div>
-  </header>
+  </div>
 
-  <!-- Keep your existing sections here -->
-  <section class="section">
-    <h2>Why Learn Thai?</h2>
-    <img loading="lazy" src="Market.png" alt="Thai Market Scene" class="scroll-bounce">
-    <p>Learning Thai opens the doors to real connection — not just tourism.</p>
-    <ul>
-      <li>✨ Explore culture deeply</li>
-      <li>🧠 Boost brainpower</li>
-      <li>💬 Make real friendships</li>
-    </ul>
-  </section>
+  <div style="position:relative;z-index:2;">
+    <div class="eyebrow">Free Thai lessons · Est. 2025</div>
+    <h1 class="hero-title">
+      <span class="glitch" data-text="Learn">Learn</span>
+      <br>
+      <span class="hero-title-italic">Thai with Tip</span>
+    </h1>
+    <p class="hero-sub">A journey into language, culture, and real connection — not just tourism. Taught by Tip, with love.</p>
+    <div class="social-row">
+      <a href="https://instagram.com/thaiwithtip" class="soc-btn" target="_blank">📸 Instagram</a>
+      <a href="https://youtube.com/@thaiwithtip" class="soc-btn" target="_blank">▶ YouTube</a>
+    </div>
+    <div class="hero-btns">
+      <a href="Download_page.html" class="btn-primary"><span>Get free lesson →</span></a>
+      <a href="vocabulary.html" class="btn-ghost">Browse vocab</a>
+    </div>
+  </div>
 
-  <section class="section">
-    <h2>What's Inside the Course?</h2>
-    <img loading="lazy" src="cards.png" alt="Thai learning flashcards" class="scroll-bounce">
-    <p>10 beginner-friendly lessons with games, illustrations, and native audio — all created with ❤️ by Tip.</p>
-  </section>
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
 
-  <section class="section">
-    <h2>Why Choose Us?</h2>
-    <img loading="lazy" src="study.png" alt="Study space with books and tea" class="scroll-bounce">
-    <p>Learn peacefully at your own pace in a warm and inviting environment. Our lessons are visual, cozy, and crafted to help you fall in love with the Thai language.</p>
-  </section>
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">10</div><div class="stat-label">Free Lessons</div></div>
+  <div class="stat-div"></div>
+  <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Years Teaching</div></div>
+  <div class="stat-div"></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free Forever</div></div>
+  <div class="stat-div"></div>
+  <div class="stat"><div class="stat-num">☕</div><div class="stat-label">Made with coffee</div></div>
+</div>
 
-  <section class="section">
-    <h2>Meet Tip</h2>
-    <img loading="lazy" src="tip.png" alt="Portrait of Tip" class="scroll-bounce">
-    <p>Hi! I’m Tip. I’ve been teaching Thai for 3 years and love sharing it through visual, joyful lessons. This course is designed for curious learners like you!</p>
-  </section>
+<section class="bento-section">
+  <div class="section-label">What's inside</div>
+  <div class="bento-grid">
+    <div class="bento-card wide">
+      <span class="card-icon">🗺️</span>
+      <div class="card-title">Unlock real Thailand</div>
+      <div class="card-body">Go beyond the tourist track. Learn to order at a local market, haggle at Chatuchak, chat with your taxi driver — in Thai. This course is built for genuine connection, not just phrases.</div>
+      <div class="card-tag">Culture · Language</div>
+      <div class="card-number">01</div>
+    </div>
+    <div class="bento-card">
+      <span class="card-icon">🃏</span>
+      <div class="card-title">Visual flashcards</div>
+      <div class="card-body">Illustrated cards with native audio, designed to stick in memory — not bore you to sleep.</div>
+      <div class="card-tag">Vocabulary</div>
+      <div class="card-number">02</div>
+    </div>
+    <div class="bento-card">
+      <span class="card-icon">🎭</span>
+      <div class="card-title">Real conversations</div>
+      <div class="card-body">Dialogues from actual life — cabs, restaurants, markets. Practice until it's natural.</div>
+      <div class="card-tag">Practice</div>
+      <div class="card-number">03</div>
+    </div>
+    <div class="bento-card">
+      <span class="card-icon">🧠</span>
+      <div class="card-title">Learn at your pace</div>
+      <div class="card-body">No rush. No subscription. No guilt. Cozy, visual lessons that respect your time and rhythm.</div>
+      <div class="card-tag">Self-paced</div>
+      <div class="card-number">04</div>
+    </div>
+  </div>
+</section>
 
-    <section class="section">
-      <h2>Quick Thai Phrases</h2>
-      <p>Learn handy phrases for daily conversations.</p>
-      <a href="vocabulary.html" class="cta-button">View Phrases</a>
-    </section>
+<section class="phrase-section">
+  <div class="phrase-eyebrow">Quick phrase of the moment</div>
+  <div class="phrase-display" id="phrase-display">
+    <span class="phrase-thai" id="pt">สวัสดีครับ / ค่ะ</span>
+    <span class="phrase-rom" id="pr">Sa-wàt-dee kráp / kâ</span>
+    <span class="phrase-eng" id="pe">Hello (formal greeting)</span>
+  </div>
+  <button class="phrase-btn" id="next-phrase">Next phrase →</button>
+</section>
 
-  <section class="section">
-    <h2>Conversation Practice</h2>
-    <p>Practice short dialogues for real-life situations.</p>
-    <a href="conversations/index.html" class="cta-button">Conversations</a>
-  </section>
+<section style="background:var(--deep);padding:80px 40px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label">Meet your teacher</div>
+    <div class="tip-section" style="padding:0;max-width:100%;">
+      <div class="tip-image-wrap">
+        <div class="tip-frame">
+          <div class="tip-img-inner">
+            <img src="tip.png" alt="Tip" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div style="display:none;flex-direction:column;align-items:center;justify-content:center;height:100%;color:rgba(254,248,238,0.2);font-size:5rem;">🌸</div>
+          </div>
+        </div>
+        <div class="tip-badge">3 yrs<br>teaching</div>
+      </div>
+      <div class="tip-text">
+        <div class="big-quote">Teaching Thai is my <em>love language.</em></div>
+        <p class="tip-body">Hi — I'm Tip. I've spent the last three years crafting visual, joyful lessons that make Thai feel less like a mountain to climb and more like a beautiful conversation to walk into. Every word, every illustration, every audio clip — made with intention.</p>
+        <p class="tip-body">This course is 100% free. Because language shouldn't have a paywall.</p>
+        <a href="Download_page.html" class="btn-primary" style="display:inline-block;"><span>Start for free →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="cta-section">
-    <h2>Ready to start learning Thai?</h2>
-    <a href="Download_page.html" class="cta-button">Download Free Lesson</a>
-  </section>
+<section class="cta-section">
+  <div class="cta-bg-text">เรียนภาษาไทย</div>
+  <div style="position:relative;z-index:1;">
+    <h2 class="cta-title">Ready to <em>speak</em><br>Thai?</h2>
+    <p class="cta-sub">No credit card. No commitment. Just language, love, and coffee.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="Download_page.html" class="btn-primary"><span>Download free lesson →</span></a>
+      <a href="conversations/index.html" class="btn-ghost">Practice conversations</a>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <p>Thai with Tip © 2025 | Built with love using AI, nature, and coffee ☕</p>
-  </footer>
+<footer>
+  <div class="footer-logo">Thai with Tip</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="vocabulary.html">Vocab</a>
+    <a href="conversations/index.html">Conversations</a>
+  </div>
+  <div class="footer-text">© 2025 · Built with AI, nature & coffee ☕</div>
+</footer>
 
-  <script src="script.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+const thaiChars='กขคงจฉชซญดตถทนบปผฝพฟภมยรลวศสหอ'.split('');
+const rain=document.getElementById('thai-rain');
+function makeChar(){
+  const el=document.createElement('span');
+  el.className='thai-char';
+  el.textContent=thaiChars[Math.floor(Math.random()*thaiChars.length)];
+  el.style.left=Math.random()*100+'%';
+  el.style.animationDuration=(6+Math.random()*8)+'s';
+  el.style.animationDelay=Math.random()*4+'s';
+  el.style.fontSize=(0.8+Math.random()*1.2)+'rem';
+  rain.appendChild(el);
+  setTimeout(()=>el.remove(),(14000));
+}
+for(let i=0;i<30;i++)setTimeout(makeChar,i*200);
+setInterval(makeChar,600);
+
+const phrases=[
+  {thai:'สวัสดีครับ / ค่ะ',rom:'Sa-wàt-dee kráp / kâ',eng:'Hello (formal greeting)'},
+  {thai:'ขอบคุณมาก',rom:'Khàwp-khun mâak',eng:'Thank you very much'},
+  {thai:'คุณชื่ออะไร',rom:'Khun chêu à-rai',eng:'What is your name?'},
+  {thai:'ไปไหนมา',rom:'Bpai năi maa',eng:'Where have you been? (casual hello)'},
+  {thai:'เท่าไหร่',rom:'Thâo-rài',eng:'How much is it?'},
+  {thai:'อร่อยมาก',rom:'À-ròy mâak',eng:'Very delicious!'},
+  {thai:'ไม่เป็นไร',rom:'Mâi bpen rai',eng:'Never mind / No problem'},
+  {thai:'ช่วยด้วย',rom:'Chûay dûay',eng:'Please help me'},
+];
+let pi=0;
+const pt=document.getElementById('pt');
+const pr=document.getElementById('pr');
+const pe=document.getElementById('pe');
+function showPhrase(i){
+  [pt,pr,pe].forEach(el=>el.style.opacity='0');
+  setTimeout(()=>{
+    pt.textContent=phrases[i].thai;
+    pr.textContent=phrases[i].rom;
+    pe.textContent=phrases[i].eng;
+    [pt,pr,pe].forEach(el=>{el.style.transition='opacity 0.4s';el.style.opacity='1';});
+  },300);
+}
+document.getElementById('next-phrase').addEventListener('click',()=>{
+  pi=(pi+1)%phrases.length;showPhrase(pi);
+});
+setInterval(()=>{pi=(pi+1)%phrases.length;showPhrase(pi);},5000);
+</script>
 </body>
 </html>
