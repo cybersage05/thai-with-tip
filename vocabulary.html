@@ -1,79 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thai Vocabulary</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.json">
-  <style>
-    .vocab-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-    .vocab-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      width: 200px;
-      text-align: center;
-      padding: 20px;
-    }
-    .vocab-card .header {
-      width: 100%;
-      height: 180px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-style: italic;
-      color: #fff;
-    }
-    .vocab-card .english {
-      font-weight: bold;
-      margin-bottom: 5px;
-      color: #333;
-    }
-    .vocab-card .thai {
-      font-size: 1.5rem;
-      margin: 5px 0;
-      color: #555;
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thai Vocabulary · Thai with Tip</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#f5c842;
+  --hot-pink:#ff2d78;
+  --deep:#0a0612;
+  --mid:#130d24;
+  --teal:#00e5c0;
+  --cream:#fef8ee;
+  --orange:#ff6b1a;
+  --purple:#6b21a8;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Space Mono',monospace;
+  background:var(--deep);
+  color:var(--cream);
+  overflow-x:hidden;
+  cursor:none;
+  min-height:100vh;
+}
+.cursor{position:fixed;width:12px;height:12px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.18s ease;mix-blend-mode:difference;}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:0.4;}
+
+nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-bottom:1px solid rgba(245,200,66,0.15);backdrop-filter:blur(20px);background:rgba(10,6,18,0.8);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);letter-spacing:0.05em;text-decoration:none;}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{color:rgba(254,248,238,0.6);text-decoration:none;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--gold);}
+
+/* PAGE HEADER */
+.page-header{
+  padding:80px 40px 60px;text-align:center;position:relative;
+  background:radial-gradient(ellipse 70% 80% at 50% 0%,#1a0a2e,var(--deep));
+  border-bottom:1px solid rgba(245,200,66,0.1);overflow:hidden;
+}
+.page-header-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.25;pointer-events:none;}
+.orb-a{width:400px;height:400px;background:#6b21a8;top:-100px;left:-100px;}
+.orb-b{width:300px;height:300px;background:#0f766e;top:-50px;right:-80px;}
+.page-eyebrow{font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--teal);display:inline-block;border:1px solid rgba(0,229,192,0.3);padding:5px 14px;border-radius:2px;margin-bottom:1.5rem;}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:0.95;letter-spacing:-0.03em;background:linear-gradient(135deg,var(--cream),var(--gold),var(--hot-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;z-index:1;}
+.page-title em{font-style:italic;font-weight:400;}
+.page-sub{font-size:0.85rem;color:rgba(254,248,238,0.45);margin-top:1rem;letter-spacing:0.05em;position:relative;z-index:1;}
+
+/* FILTER BAR */
+.filter-bar{
+  display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;
+  padding:32px 40px;
+  border-bottom:1px solid rgba(245,200,66,0.08);
+}
+.filter-btn{
+  background:transparent;border:1px solid rgba(254,248,238,0.15);
+  color:rgba(254,248,238,0.5);font-family:'Space Mono',monospace;
+  font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;
+  padding:8px 16px;border-radius:2px;cursor:none;transition:all 0.2s;
+}
+.filter-btn:hover{border-color:rgba(245,200,66,0.4);color:var(--gold);}
+.filter-btn.active{background:var(--gold);color:var(--deep);border-color:var(--gold);}
+
+/* SEARCH */
+.search-wrap{display:flex;justify-content:center;padding:0 40px 32px;}
+.search-input{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(254,248,238,0.1);
+  color:var(--cream);font-family:'Space Mono',monospace;font-size:0.8rem;
+  padding:12px 20px;width:100%;max-width:400px;border-radius:2px;outline:none;
+  transition:border-color 0.2s;letter-spacing:0.05em;
+}
+.search-input::placeholder{color:rgba(254,248,238,0.2);}
+.search-input:focus{border-color:rgba(245,200,66,0.4);}
+
+/* VOCAB GRID */
+.vocab-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:16px;
+  padding:20px 40px 80px;
+  max-width:1400px;margin:0 auto;
+}
+
+/* VOCAB CARD */
+.vocab-card{
+  background:var(--mid);
+  border:1px solid rgba(245,200,66,0.08);
+  border-radius:4px;overflow:hidden;
+  cursor:none;
+  transition:border-color 0.3s,transform 0.3s;
+  position:relative;
+}
+.vocab-card:hover{
+  border-color:rgba(245,200,66,0.35);
+  transform:translateY(-4px) rotate(-0.3deg);
+}
+.vocab-card:hover .card-glow{opacity:1;}
+
+.card-glow{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(245,200,66,0.05) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.3s;pointer-events:none;
+}
+
+.card-emoji-zone{
+  height:140px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  font-size:4rem;
+  border-bottom:1px solid rgba(245,200,66,0.06);
+}
+.card-emoji-zone img{
+  width:100%;height:100%;object-fit:cover;
+}
+.card-emoji-bg{
+  position:absolute;inset:0;
+  opacity:0.15;filter:blur(20px);
+  font-size:8rem;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.card-emoji-main{position:relative;z-index:1;}
+
+.card-cat-tag{
+  position:absolute;top:10px;right:10px;
+  font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;
+  padding:3px 8px;border-radius:2px;border:1px solid;
+  z-index:2;
+}
+
+.card-body{padding:16px 14px 20px;}
+.card-english{
+  font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(254,248,238,0.4);margin-bottom:6px;
+}
+.card-thai{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-weight:900;
+  background:linear-gradient(135deg,var(--cream),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1.1;margin-bottom:6px;
+}
+.card-romanized{
+  font-size:0.75rem;color:var(--teal);
+  font-style:italic;letter-spacing:0.05em;
+}
+.card-meaning{
+  font-size:0.72rem;color:rgba(254,248,238,0.55);
+  margin-top:8px;line-height:1.6;
+}
+
+/* PLAY BUTTON */
+.card-play{
+  position:absolute;bottom:14px;right:14px;
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(245,200,66,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;cursor:none;
+  transition:all 0.2s;color:rgba(245,200,66,0.5);
+}
+.vocab-card:hover .card-play{border-color:var(--gold);color:var(--gold);background:rgba(245,200,66,0.08);}
+
+/* EMPTY STATE */
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:80px 20px;
+  color:rgba(254,248,238,0.2);font-size:0.85rem;letter-spacing:0.1em;
+}
+
+/* FOOTER */
+footer{padding:40px;background:var(--mid);border-top:1px solid rgba(245,200,66,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.1rem;}
+.footer-text{font-size:0.7rem;color:rgba(254,248,238,0.3);letter-spacing:0.1em;}
+
+@media(max-width:768px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  .vocab-grid{padding:20px 16px 60px;gap:12px;}
+  .page-header{padding:60px 20px 40px;}
+  footer{flex-direction:column;text-align:center;}
+}
+</style>
 </head>
 <body>
-  <nav class="navbar">
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Thai with Tip</a>
+  <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="vocabulary.html">Vocabulary</a>
     <a href="conversations/index.html">Conversations</a>
     <a href="Download_page.html">Download</a>
-  </nav>
-  <header class="hero" style="background-image: url('background.png');">
-    <div class="overlay">
-      <h1>Quick Thai Phrases</h1>
-      <p>Essential phrases with pictures and romanization.</p>
-      <a href="index.html" class="cta-button">Back Home</a>
-    </div>
-  </header>
+  </div>
+</nav>
 
-  <section class="section">
-    <div id="vocabContainer" class="vocab-container"></div>
-  </section>
+<div class="page-header">
+  <div class="page-header-orb orb-a"></div>
+  <div class="page-header-orb orb-b"></div>
+  <div class="page-eyebrow">Quick reference</div>
+  <h1 class="page-title">Thai <em>Phrases</em></h1>
+  <p class="page-sub">Essential words with romanization · Click a card to hear it</p>
+</div>
 
-  <footer>
-    <p>Thai with Tip © 2025</p>
-  </footer>
+<div class="filter-bar" id="filter-bar">
+  <button class="filter-btn active" data-cat="all">All</button>
+</div>
 
-  <script src="vocab.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
+<div class="search-wrap">
+  <input class="search-input" id="search" type="text" placeholder="Search in English or Thai..."/>
+</div>
+
+<div class="vocab-grid" id="vocab-grid"></div>
+
+<footer>
+  <div class="footer-logo">Thai with Tip</div>
+  <div class="footer-text">© 2025 · Built with AI, nature & coffee ☕</div>
+</footer>
+
+<script>
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+
+const CAT_COLORS={
+  greetings:{tag:'rgba(0,229,192,0.15)',border:'rgba(0,229,192,0.4)',text:'#00e5c0'},
+  food:{tag:'rgba(255,107,26,0.15)',border:'rgba(255,107,26,0.4)',text:'#ff6b1a'},
+  travel:{tag:'rgba(245,200,66,0.15)',border:'rgba(245,200,66,0.4)',text:'#f5c842'},
+  numbers:{tag:'rgba(255,45,120,0.15)',border:'rgba(255,45,120,0.4)',text:'#ff2d78'},
+  useful:{tag:'rgba(107,33,168,0.35)',border:'rgba(167,139,250,0.5)',text:'#c4b5fd'},
+};
+
+// Built-in vocab — will be merged with vocab.js if it defines window.vocabData
+const BUILT_IN=[
+  {emoji:'👋',english:'Hello',thai:'สวัสดี',romanized:'Sa-wàt-dee',meaning:'Formal greeting, add kráp (m) or kâ (f)',category:'greetings'},
+  {emoji:'🙏',english:'Thank you',thai:'ขอบคุณ',romanized:'Khàwp-khun',meaning:'Add mâak for "very much"',category:'greetings'},
+  {emoji:'😊',english:'You\'re welcome',thai:'ยินดี',romanized:'Yin-dee',meaning:'Literally "happy to help"',category:'greetings'},
+  {emoji:'🤝',english:'Nice to meet you',thai:'ยินดีที่รู้จัก',romanized:'Yin-dee thîi róo-jàk',meaning:'Said when meeting someone new',category:'greetings'},
+  {emoji:'👋',english:'Goodbye',thai:'ลาก่อน',romanized:'Laa-gàwn',meaning:'Casual farewell',category:'greetings'},
+  {emoji:'🍜',english:'Delicious',thai:'อร่อย',romanized:'À-ròy',meaning:'The highest compliment for food',category:'food'},
+  {emoji:'💧',english:'Water',thai:'น้ำ',romanized:'Nám',meaning:'Essential word at any restaurant',category:'food'},
+  {emoji:'🌶️',english:'Spicy',thai:'เผ็ด',romanized:'Phèt',meaning:'Warning: Thai spicy is serious',category:'food'},
+  {emoji:'🍚',english:'Rice',thai:'ข้าว',romanized:'Khâao',meaning:'The heart of every Thai meal',category:'food'},
+  {emoji:'🥢',english:'I\'m full',thai:'อิ่มแล้ว',romanized:'Ìm láew',meaning:'Say after a satisfying meal',category:'food'},
+  {emoji:'🗺️',english:'Where is...?',thai:'...อยู่ที่ไหน',romanized:'...yòo thîi năi',meaning:'Add location before อยู่ที่ไหน',category:'travel'},
+  {emoji:'🚕',english:'Taxi',thai:'แท็กซี่',romanized:'Tháek-sîi',meaning:'Metered taxis in Bangkok',category:'travel'},
+  {emoji:'💰',english:'How much?',thai:'เท่าไหร่',romanized:'Thâo-rài',meaning:'Essential for markets & shopping',category:'travel'},
+  {emoji:'🏨',english:'Hotel',thai:'โรงแรม',romanized:'Roong-raem',meaning:'Ask for rates with thâo-rài',category:'travel'},
+  {emoji:'🚽',english:'Toilet',thai:'ห้องน้ำ',romanized:'Hâwng-nám',meaning:'Literally "water room"',category:'travel'},
+  {emoji:'1️⃣',english:'One',thai:'หนึ่ง',romanized:'Nùeng',meaning:'First number to learn',category:'numbers'},
+  {emoji:'2️⃣',english:'Two',thai:'สอง',romanized:'Sǎawng',meaning:'Tones matter for numbers',category:'numbers'},
+  {emoji:'3️⃣',english:'Three',thai:'สาม',romanized:'Sǎam',meaning:'Used in counting & ordering',category:'numbers'},
+  {emoji:'🔟',english:'Ten',thai:'สิบ',romanized:'Sìp',meaning:'Base for 11-19: sìp-et, sìp-sǎawng...',category:'numbers'},
+  {emoji:'💯',english:'Hundred',thai:'ร้อย',romanized:'Rói',meaning:'Prices often given in hundreds',category:'numbers'},
+  {emoji:'🙅',english:'No problem',thai:'ไม่เป็นไร',romanized:'Mâi bpen rai',meaning:'The most Thai phrase there is',category:'useful'},
+  {emoji:'❓',english:'I don\'t understand',thai:'ไม่เข้าใจ',romanized:'Mâi khâo jai',meaning:'Useful when lost in conversation',category:'useful'},
+  {emoji:'🗣️',english:'Can you repeat?',thai:'พูดอีกครั้ง',romanized:'Phûut ìik khráng',meaning:'Ask them to say it again',category:'useful'},
+  {emoji:'✅',english:'Yes',thai:'ใช่',romanized:'Châi',meaning:'Agreement — distinct from "krub/ka"',category:'useful'},
+  {emoji:'❌',english:'No',thai:'ไม่',romanized:'Mâi',meaning:'Also means "not" as a prefix',category:'useful'},
+];
+
+let allVocab=[...BUILT_IN];
+if(typeof vocabData!=='undefined'&&Array.isArray(vocabData)){
+  allVocab=[...vocabData,...BUILT_IN];
+}
+
+let activeFilter='all';
+let searchQuery='';
+
+const categories=['all',...new Set(allVocab.map(v=>v.category).filter(Boolean))];
+const filterBar=document.getElementById('filter-bar');
+filterBar.innerHTML='';
+categories.forEach(cat=>{
+  const btn=document.createElement('button');
+  btn.className='filter-btn'+(cat==='all'?' active':'');
+  btn.dataset.cat=cat;
+  btn.textContent=cat==='all'?'All':cat.charAt(0).toUpperCase()+cat.slice(1);
+  btn.addEventListener('click',()=>{
+    activeFilter=cat;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGrid();
+  });
+  filterBar.appendChild(btn);
+});
+
+document.getElementById('search').addEventListener('input',e=>{
+  searchQuery=e.target.value.toLowerCase();
+  renderGrid();
+});
+
+function speak(text){
+  if('speechSynthesis' in window){
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang='th-TH';u.rate=0.85;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+  }
+}
+
+function renderGrid(){
+  const grid=document.getElementById('vocab-grid');
+  const filtered=allVocab.filter(v=>{
+    const catMatch=activeFilter==='all'||v.category===activeFilter;
+    const q=searchQuery;
+    const searchMatch=!q||(v.english&&v.english.toLowerCase().includes(q))||(v.thai&&v.thai.includes(q))||(v.romanized&&v.romanized.toLowerCase().includes(q));
+    return catMatch&&searchMatch;
+  });
+
+  if(filtered.length===0){
+    grid.innerHTML='<div class="empty-state">No phrases found. Try a different search.</div>';
+    return;
+  }
+
+  grid.innerHTML=filtered.map((v,i)=>{
+    const cc=CAT_COLORS[v.category]||CAT_COLORS.useful;
+    const delay=Math.min(i*30,300);
+    return `
+    <div class="vocab-card" style="animation:fadeUp 0.4s ease ${delay}ms both;" onclick="speak('${v.thai.replace(/'/g,"\\'")}')">
+      <div class="card-glow"></div>
+      <div class="card-emoji-zone" style="background:linear-gradient(135deg,rgba(10,6,18,0.5),rgba(19,13,36,0.8));">
+        <div class="card-emoji-bg">${v.emoji||'🌟'}</div>
+        <div class="card-emoji-main">${v.emoji||'🌟'}</div>
+        ${v.category?`<div class="card-cat-tag" style="background:${cc.tag};border-color:${cc.border};color:${cc.text};">${v.category}</div>`:''}
+      </div>
+      <div class="card-body">
+        <div class="card-english">${v.english||''}</div>
+        <div class="card-thai">${v.thai||''}</div>
+        <div class="card-romanized">${v.romanized||''}</div>
+        ${v.meaning?`<div class="card-meaning">${v.meaning}</div>`:''}
+      </div>
+      <div class="card-play" title="Play pronunciation">▶</div>
+    </div>`;
+  }).join('');
+}
+
+const style=document.createElement('style');
+style.textContent='@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}';
+document.head.appendChild(style);
+
+renderGrid();
+</script>
+<script src="vocab.js" onerror="void 0"></script>
 </body>
 </html>
